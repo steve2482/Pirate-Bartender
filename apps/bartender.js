@@ -29,9 +29,9 @@ function Pantry(barIngredients) {
   this.barIngredients = barIngredients;
 }
 
-// Resturant Pantry for when adding food questions later
+// Restaurant Pantry for when adding food questions later
 
-var resturantPantry = new Pantry(barIngredients);
+var restaurantPantry = new Pantry(barIngredients);
 
 // Customer preferences constructor function
 
@@ -57,9 +57,9 @@ $(document).ready(function() {
   $('#yes, #no').click(function(e) {
     e.preventDefault();
     if (this.id === 'yes') {
-      customerPreferences[questionNumber] = 'yes';
+      customerPreferences[questionNumber] = true;
     } else if (this.id === "no") {
-      customerPreferences[questionNumber] = "no";
+      customerPreferences[questionNumber] = false;
     }
     questionNumber++;
     $('.bar-questions').text(barQuestions.questions[questionNumber]);
