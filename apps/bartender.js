@@ -9,14 +9,16 @@ function Questions() {
 
 var barQuestions = new Questions();
 
-// Bar ingredients contructor function
+// create the Pirate Bartender
 
+var pirateBartender = new Bartender();
+
+// Bar ingredients constructor function
+
+var randomIngredient = Math.floor((Math.random() * 2) + 0);
 function Ingredients() {
-  this.strong = ['glug of rum', 'slug of whisky', 'splash of gin'];
-  this.salty = ['olive on a stick', 'salt-dusted rim', 'rasher of bacon'];
-  this.bitter = ['shake of bitters', 'splash of tonic', 'twist of lemon peel'];
-  this.sweet = ['sugar cube', 'spoonful of honey', 'spash of cola'];
-  this.fruity = ['slice of orange', 'dash of cassis', 'cherry on top'];
+  this.ingredients = [{strong: ['glug of rum', 'slug of whisky', 'splash of gin']}, {salty: ['olive on a stick', 'salt-dusted rim', 'rasher of bacon']}, {bitter: ['shake of bitters', 'splash of tonic', 'twist of lemon peel']}, {sweet: ['sugar cube', 'spoonful of honey', 'spash of cola']}, {fruity: ['slice of orange', 'dash of cassis', 'cherry on top']}];
+  this.randomIngredient = randomIngredient;
 }
 
 // Bar ingredients
@@ -39,6 +41,23 @@ function Preferences() {
   this.preferences = [];
 }
 
+// Bartender constructor function
+
+function Bartender() {
+  this.questions = barQuestions;
+  this.createDrink = function(preferences) {
+    var drink = [];
+    for (var i = 0; i < 7; i++) {
+      if (preferences[i]) {
+        drink.push(barIngredients[i].randomIngredient);
+      }
+    }
+    return drink;
+  };
+}
+
+// ----APPLICATION----
+
 $(document).ready(function() {
   var customerPreferences = new Preferences();
 
@@ -58,11 +77,24 @@ $(document).ready(function() {
     e.preventDefault();
     if (this.id === 'yes') {
       customerPreferences[questionNumber] = true;
+      questionNumber++;
+      $('.bar-questions').text(barQuestions.questions[questionNumber]);
     } else if (this.id === "no") {
       customerPreferences[questionNumber] = false;
+      questionNumber++;
+      $('.bar-questions').text(barQuestions.questions[questionNumber]);
     }
-    questionNumber++;
-    $('.bar-questions').text(barQuestions.questions[questionNumber]);
-    console.log(customerPreferences);
+    if (questionNumber === 5) {
+      $('.answer-buttons').hide();
+      $('.create-drink').show();
+      $('.bar-questions').text("Have the Bartender Mix Your Drink!");
+    }
+  });
+
+// Need to create event listener-----------------
+  $('.create').click(function(e) {
+    e.preventDefault();
+    pirateBartender.createDrink(customerPreferences);
+    console.log(drink);
   });
 });
