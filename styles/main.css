@@ -7,3 +7,7 @@ body {
 .answer-buttons {
 	display: none;
 }
+
+.create-drink {
+	display: none;
+}
