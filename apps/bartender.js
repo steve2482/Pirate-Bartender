@@ -48,7 +48,7 @@ function Bartender() {
 $(document).ready(function() {
   var customerPreferences = new Preferences();
   var barQuestions = new Questions();
-  
+
   // User answers if they want a drink yes/no
 
   $('#need').click(function(e) {
@@ -58,7 +58,7 @@ $(document).ready(function() {
     $('.answer-buttons').show();
   });
 
-  // Answer to drink preferences
+  // Answer to drink preferences, choices added to preferences array
 
   var questionNumber = 0;
   $('#yes, #no').click(function(e) {
@@ -72,12 +72,17 @@ $(document).ready(function() {
       questionNumber++;
       $('.bar-questions').text(barQuestions.questions[questionNumber]);
     }
+
+    // All questions answered
+
     if (questionNumber === 5) {
       $('.answer-buttons').hide();
       $('.create-drink').show();
       $('.bar-questions').text("Have the Bartender Mix Your Drink!");
     }
   });
+
+  // Bartender mixes drink and displays ingredients used to customer
 
   $('#create').click(function(e) {
     e.preventDefault();
