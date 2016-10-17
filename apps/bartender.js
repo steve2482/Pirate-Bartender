@@ -18,7 +18,7 @@ function Ingredients() {
 
 // Pantry constructor function
 
-function Pantry(barIngredients) {
+function Pantry() {
   this.barIngredients = new Ingredients();
 }
 
@@ -36,7 +36,9 @@ function Bartender() {
     var drink = [];
     for (var i = 0; i < preferences.length; i++) {
       if (preferences[i]) {
-        drink.push(restaurantPantry.barIngredients.ingredients[i][restaurantPantry.barIngredients.randomIngredient]);
+        var drinkIngredient = restaurantPantry.barIngredients.ingredients[i];
+        var pullRandomIngredient = restaurantPantry.barIngredients.randomIngredient;
+        drink.push(drinkIngredient[pullRandomIngredient]);
       }
     }
     return drink;
@@ -91,7 +93,7 @@ $(document).ready(function() {
     var last = drink.length - 1;
     $('.bar-questions').text("Here's your drink mixed with");
     for (var i = 0; i < drink.length - 1; i++) {
-      $('.bar-questions').append(", a " + drink[i].toString());
+      $('.bar-questions').append(", a " + drink[i]);
     }
     $('.bar-questions').append(" and a " + drink[last]);
     $('.bar-questions').append(".");
